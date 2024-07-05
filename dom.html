@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="bac">bado</h1>
+    <input type="text" placeholder="NAME" value="">
+    <button onclick="fun()">click</button>
+</body>
+</html>
+<script>
+    let head=document.createElement("h2");
+    head.innerText="heading2";
+    head.style.color="brown"
+    head.setAttribute("id","head");
+    let body=document.querySelector("body");
+    body.append(head);
+        let y=document.getElementById("bac");
+        let div=document.createElement("div");
+        body.append(div);
+function fun(){
+
+        let x=document.querySelector("input");
+        console.log(x.value);
+        y.innerText=x.value;
+        console.log(y.value);
+}
+
+</script>

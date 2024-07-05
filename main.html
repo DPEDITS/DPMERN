@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="head">bro</h1>
+    <h1 class="h">bro</h1>
+    <h1 class="h">bro</h1>
+    <h1 class="h">bro</h1>
+    <h1 class="h">bro</h1>
+    <button onclick="transistion()">Click</button>
+</body>
+</html>
+<script>
+    let bool=true;
+
+    function transistion(){
+        bool=!bool;
+        if (bool==true){
+            x[0].innerHTML="updated";
+    }
+    else{
+        x[0].innerHTML="updated again";
+    }
+
+    }
+    let x=document.getElementsByClassName("h");
+</script>
