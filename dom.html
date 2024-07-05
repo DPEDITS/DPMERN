@@ -6,9 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 id="bac">bado</h1>
-    <input type="text" placeholder="NAME" value="">
-    <button onclick="fun()">click</button>
+
 </body>
 </html>
 <script>
@@ -22,11 +20,28 @@
         let div=document.createElement("div");
         body.append(div);
 function fun(){
-
-        let x=document.querySelector("input");
-        console.log(x.value);
-        y.innerText=x.value;
-        console.log(y.value);
+    if(inp.value === ""){
+        alert("NASA is Hacked !!!");
+    }else{
+    arr.push(inp.value);
+console.log(arr);
+display();
+    }
 }
+function display(){
+    div.innerHTML="";
+    for(let i=0;i<arr.length;i++){
+    let h1=document.createElement("h1");
+        h1.innerText=arr[i];
+        div.append(h1);
+    }
+}
+let arr = [];
+let inp=document.createElement("input");
+let btn=document.createElement("button");
+btn.innerText="Click"
+body.append(inp,btn);
+btn.addEventListener("click",fun);
+
 
 </script>
