@@ -107,7 +107,7 @@
   </body>
 </html>
 <script>
-  let entries = [];
+  let arr = [];
   let imageRight = true;
 
   let btn = document.querySelector(".submit");
@@ -117,7 +117,7 @@
     let textInput = document.getElementById("text-input").value;
     let imgInput = document.getElementById("img-input").value;
     if (textInput && imgInput) {
-      entries.push({ text: textInput, img: imgInput });
+      arr.push({ text: textInput, img: imgInput });
       imageRight = !imageRight;
       display();
     } else {
