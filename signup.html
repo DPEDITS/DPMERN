@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
         body {
-            height: 100vh;
+            height: 700px;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background: linear-gradient(to right , rgb(0, 242, 255),rgba(0, 85, 255, 0.315));
+
+            background: linear-gradient(to right, rgb(0, 242, 255), rgba(0, 85, 255, 0.315));
         }
-        .signup1{
+
+        .signup1 {
             color: rgb(255, 0, 0);
             text-decoration: none;
         }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -52,10 +52,12 @@
             outline: none;
         }
 
-        .head,.signup{
+        .head,
+        .signup {
             color: white;
         }
-        .button{
+
+        .button {
             border: solid rgb(255, 255, 255);
             border-radius: 15px;
             margin: 10px;
@@ -63,40 +65,116 @@
             color: white;
             padding: 10px;
             width: 50%;
-    transition: background-color 0.3s;
-}
-button:hover{
-    background-color: #ff0000;
-}
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff0000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: rgba(0, 0, 0, 0.575);
+            color: white;
+        }
+
+        .nav {
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 85vh;
+        }
+
+        .nav-button,
+        .nav-button1 {
+            color: white;
+            text-decoration: none;
+            background-color: #444;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #ff0000;
+        }
+
+        .nav-button1:hover {
+            background-color: rgb(0, 47, 255);
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1 class="head">Sign Up</h1>
-        <input type="text" id="name" placeholder="Name">
-        <input type="password" id="password" placeholder="Password">
-        <input type="email" id="email" placeholder="E-mail">
-        <button onclick="login()" class="button">Sign-Up</button>
 
-        <p class="signup">Already Have An Account? <a class="signup1" href="login.html">Login Now</a></p>
+<body>
+    <div class="navbar">
+        <div class="nav">
+            <h1 class="name">Dp_Edits29</h1>
+        </div>
+        <div class="buttons">
+            <a href="addProd.html" class="nav-button">add</a>
+            <a href="homePage.html" class="nav-button1">home</a>
+            <a href="login.html" class="nav-button">login</a>
+            <a href="signUp.html" class="nav-button1">signUp</a>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="container">
+            <h1 class="head">Sign Up</h1>
+            <input type="text" id="name" placeholder="Name">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()" class="button">Sign-Up</button>
+            <p class="signup">Already Have An Account? <a class="signup1" href="login.html">Login Now</a></p>
+        </div>
     </div>
 </body>
+
+</html>
+
+<body>
+
+</body>
+
 </html>
 <script>
-let arr=[];
-function login() {
-let x= document.getElementById("name").value;
-let y=document.getElementById("password").value;
-let z=document.getElementById("email").value;
-if(x==="" && y=== ""){
-}
-else{
-arr.push(x,y,z);
-console.log("Name:"+x);
-console.log("Password:"+y);
-console.log("E-Mail:"+z);
+    let signUpData = JSON.parse(localStorage.getItem("signUpArr")) || []
+    console.log(signUpData);
+    let flag = false;
+    let userName = document.querySelector("#name")
+    let pass = document.querySelector("#password")
 
-console.log(arr);
-}
-}
+    function login() {
+        let obj = {
+            userName: userName.value,
+            pass: pass.value
+        }
+        for (let i = 0; i < signUpData.length; i++) {
+            if (signUpData[i].userName === obj.userName) {
+                flag = true;
+                alert("user already exist")
+            } else {
+                flag = false;
+            }
+        }
+        if (flag === false) {
+            signUpData.push(obj)
+            localStorage.setItem("signUpArr", JSON.stringify(signUpData))
+        }
+        console.log(signUpData);
+
+    }
 </script>

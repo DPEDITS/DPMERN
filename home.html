@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    body {
+      background: linear-gradient(to right, rgba(0, 0, 255, 0.405), rgba(255, 0, 0, 0.395));
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: aliceblue;
+      margin: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.575);
+      color: white;
+    }
+
+    .navbar h1 {
+      font-size: 24px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-button,
+    .nav-button1 {
+      color: white;
+      text-decoration: none;
+      background-color: #444;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-button:hover {
+      background-color: #ff0000;
+    }
+
+    .nav-button1:hover {
+      background-color: rgb(0, 47, 255);
+    }
+
+    .content {
+      max-width: 90%;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+      gap: 20px;
+    }
+
+    .entry {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .entry:hover {
+      transform: scale(1.05);
+    }
+
+    .entry img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .entry p {
+      padding: 10px;
+      margin: 0%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="nav">
+      <h1 class="name">Dp_Edits29</h1>
+    </div>
+    <div class="buttons">
+      <a href="addprod.html" class="nav-button">Add</a>
+      <a href="home.html" class="nav-button1">Home</a>
+      <a href="login.html" class="nav-button">Login</a>
+      <a href="signUp.html" class="nav-button1">SignUp</a>
+    </div>
+  </div>
+  <div class="content"></div>
+
+  <script>
+    let adddata = JSON.parse(localStorage.getItem("addDATA")) || [];
+    console.log(adddata);
+    let contentDiv = document.querySelector(".content");
+    contentDiv.innerHTML = "";
+
+    for (let i = 0; i < adddata.length; i++) {
+      let entry = adddata[i];
+      const entryDiv = document.createElement("div");
+      entryDiv.classList.add("entry");
+
+      const para = document.createElement("p");
+      para.textContent = entry.text;
+
+      const pricedata = document.createElement("p");
+      pricedata.textContent = "RS " + entry.price;
+
+      const img = document.createElement("img");
+      img.src = entry.img;
+      img.alt = entry.text;
+
+      entryDiv.append(img, para, pricedata);
+      contentDiv.append(entryDiv);
+    }
+  </script>
+</body>
+
+</html>

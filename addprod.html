@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <style>
-  body {
+    body {
       background: linear-gradient(to right, rgba(0, 0, 255, 0.405), rgba(255, 0, 0, 0.395));
       margin: 0px;
     }
@@ -20,7 +20,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
-      background-color: #333;
+      background-color: rgba(0, 0, 0, 0.575);
       color: white;
     }
 
@@ -110,13 +110,13 @@
       margin-left: 20px;
       padding: 10px;
       border-radius: 5px;
-      float: right;
+
     }
 
     .entry p {
       padding: 5px;
+      text-align: left;
     }
-
   </style>
 </head>
 
@@ -126,15 +126,16 @@
       <h1 class="name">Dp_Edits29</h1>
     </div>
     <div class="buttons">
-
-      <a href="#home" class="nav-button">Home</a>
-      <a href="login.html" class="nav-button">Login</a>
-      <a href="signup.html" class="nav-button1">Signup</a>
+      <a href="addprod.html" class="nav-button">add</a>
+      <a href="home.html" class="nav-button1">home</a>
+      <a href="login.html" class="nav-button">login</a>
+      <a href="signUp.html" class="nav-button1">signUp</a>
     </div>
   </div>
   <div class="input">
     <input type="text" placeholder="Text" id="text-input" />
     <input type="url" placeholder="Img link" id="img-input" />
+    <input type="number" placeholder="Price" id="price-input" />
     <button class="submit">Submit</button>
   </div>
   <div class="content"></div>
@@ -143,7 +144,9 @@
 
 </html>
 <script>
-  let arr = [];
+  let adddata = JSON.parse(localStorage.getItem("addDATA")) || [];
+  console.log(adddata);
+  // let arr = [];
   let imageRight = true;
 
   let btn = document.querySelector(".submit");
@@ -152,36 +155,35 @@
   function click() {
     let textInput = document.getElementById("text-input").value;
     let imgInput = document.getElementById("img-input").value;
-    if (textInput && imgInput) {
-      arr.push({ text: textInput, img: imgInput });
-      imageRight = !imageRight;
-      display();
+    let priceInput = document.getElementById("price-input").value;
+    if (textInput && imgInput && priceInput) {
+      adddata.push({ text: textInput, img: imgInput, price: priceInput });
+      localStorage.setItem("addDATA", JSON.stringify(adddata))
     } else {
-      alert("No text or url present");
+      alert("Text, image URL, or price is missing");
     }
   }
+  // function display() {
+  //   let contentDiv = document.querySelector(".content");
+  //   contentDiv.innerHTML = "";
 
-  function display() {
-    let contentDiv = document.querySelector(".content");
-    contentDiv.innerHTML = "";
+  //   for (let i = 0; i < arr.length; i++) {
+  //     let entry = arr[i];
+  //     const entryDiv = document.createElement("div");
+  //     entryDiv.classList.add("entry");
 
-    for (let i = 0; i < arr.length; i++) {
-      let entry = arr[i];
-      const entryDiv = document.createElement("div");
-      entryDiv.classList.add("entry");
+  //     const para = document.createElement("p");
+  //     para.textContent = entry.text;
 
-      const para = document.createElement("p");
-      para.textContent = entry.text;
-
-      const img = document.createElement("img");
-      img.src = entry.img;
-      img.alt = entry.text;
-      if (i % 2 == 0) {
-        entryDiv.append(para, img);
-      } else {
-        entryDiv.append(img, para);
-      }
-      contentDiv.append(entryDiv);
-    }
-  }
+  //     const img = document.createElement("img");
+  //     img.src = entry.img;
+  //     img.alt = entry.text;
+  //     if (i % 2 == 0) {
+  //       entryDiv.append(para, img);
+  //     } else {
+  //       entryDiv.append(img, para);
+  //     }
+  //     contentDiv.append(entryDiv);
+  //   }
+  // }
 </script>

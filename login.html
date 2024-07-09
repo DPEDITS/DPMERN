@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,15 @@
         body {
             height: 700px;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background: linear-gradient(to right , rgb(0, 242, 255),rgba(0, 85, 255, 0.315));
+
+            background: linear-gradient(to right, rgb(0, 242, 255), rgba(0, 85, 255, 0.315));
         }
-        .signup1{
+
+        .signup1 {
             color: rgb(255, 0, 0);
             text-decoration: none;
         }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -50,10 +50,12 @@
             outline: none;
         }
 
-        .head,.signup{
+        .head,
+        .signup {
             color: white;
         }
-        .button{
+
+        .button {
             border: solid rgb(255, 255, 255);
             border-radius: 15px;
             margin: 10px;
@@ -61,36 +63,118 @@
             color: white;
             padding: 10px;
             width: 50%;
-    transition: background-color 0.3s;
-}
-button:hover{
-    background-color: #ff0000;
-}
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff0000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: rgba(0, 0, 0, 0.575);
+            color: white;
+        }
+
+        .nav {
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 85vh;
+        }
+
+        .nav-button,
+        .nav-button1 {
+            color: white;
+            text-decoration: none;
+            background-color: #444;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #ff0000;
+        }
+
+        .nav-button1:hover {
+            background-color: rgb(0, 47, 255);
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1 class="head">Login</h1>
-        <input type="text" id="name" placeholder="Name">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="login()" class="button">Login</button>
 
-        <p class="signup">Don't have an account? <a class="signup1" href="signup.html">Sign Up Now</a></p>
+<body>
+    <div class="navbar">
+        <div class="nav">
+            <h1 class="name">Dp_Edits29</h1>
+        </div>
+        <div class="buttons">
+            <a href="addprod.html" class="nav-button">add</a>
+            <a href="home.html" class="nav-button1">home</a>
+            <a href="login.html" class="nav-button">login</a>
+            <a href="signUp.html" class="nav-button1">signUp</a>
+        </div>
+    </div>
+    <div class="container1">
+        <div class="container">
+            <h1 class="head">Login</h1>
+            <input type="text" id="name" placeholder="Name">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()" class="button">Login</button>
+
+            <p class="signup">Don't have an account? <a class="signup1" href="signup.html">Sign Up Now</a></p>
+        </div>
     </div>
 </body>
+
 </html>
 <script>
-    let arr=[];
+    let SignUpdata = JSON.parse(localStorage.getItem("signUpArr")) || [];
+    console.log(SignUpdata);
+    let flag = false;
+    let userName = document.querySelector("#name");
+    let pass = document.querySelector("#password");
     function login() {
-    let x= document.getElementById("name").value;
-    let y=document.getElementById("password").value;
-    if(x==="" && y=== ""){
+        for (let i = 0; i < SignUpdata.length; i++) {
+            if (SignUpdata[i].userName === userName.value && SignUpdata[i].pass === pass.value) {
+                flag = true;
+            }
+
+        }
+        if (flag == true) {
+            alert("Login Successfull");
+            window.open("home.html");
+        } else {
+            alert("login failed")
+        }
+        flag = false;
     }
-    else{
-    arr.push(x,y);
-    console.log("Name:"+x);
-    console.log("Password:"+y);
-    console.log(arr);
-    }
-    }
+    // let arr=[];
+    // function login() {
+    // let x= document.getElementById("name").value;
+    // let y=document.getElementById("password").value;
+    // if(x==="" && y=== ""){
+    // }
+    // else{
+    // arr.push(x,y);
+    // console.log("Name:"+x);
+    // console.log("Password:"+y);
+    // console.log(arr);
+    // }
+    // }
 </script>
