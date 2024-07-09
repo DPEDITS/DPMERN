@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    body {
+      background: linear-gradient(to right, rgba(0, 0, 255, 0.405), rgba(255, 0, 0, 0.395));
+      margin: 0px;
+    }
+
+    h1 {
+      color: aliceblue;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      background-color: rgba(0, 0, 0, 0.575);
+      color: white;
+    }
+
+    .nav {
+      font-size: 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-button,
+    .nav-button1 {
+      color: white;
+      text-decoration: none;
+      background-color: #444;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-button:hover {
+      background-color: #ff0000;
+    }
+
+    .nav-button1:hover {
+      background-color: rgb(0, 47, 255);
+    }
+
+    .input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      display: grid;
+      grid-template-columns: 200px;
+      gap: 5px;
+      margin-top: 50px;
+    }
+
+    .input {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .input input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .input button {
+      background-color: rgb(86, 86, 86);
+      color: #fff;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .input button:hover {
+      background-color: rgb(255, 0, 0);
+    }
+
+    .content {
+      border-radius: 10px;
+      max-width: 90%;
+      margin: 20px auto;
+    }
+
+    .entry {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      border: 4px solid black;
+      border-radius: 5px;
+      background: transparent;
+    }
+
+    .entry img {
+      max-height: 120px;
+      margin-left: 20px;
+      padding: 10px;
+      border-radius: 5px;
+
+    }
+
+    .entry p {
+      padding: 5px;
+      text-align: left;
+    }
+
+    .container1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 85vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.575);
+            width: 300px;
+            height: 500px;
+            border-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+
+        }
+
+        .container input[type="text"],
+        .container input[type="number"],
+        .container input[type="url"] {
+            border: solid rgb(255, 255, 255);
+            border-radius: 15px;
+            margin: 10px;
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .container input[type="text"]:focus,
+        .container input[type="number"]:focus,
+        .container input[type="url"]:focus {
+            border-color: rgb(255, 0, 43);
+            outline: none;
+        }
+        .submit{
+          border: solid rgb(255, 255, 255);
+            border-radius: 15px;
+            margin: 10px;
+            background-color: transparent;
+            color: white;
+            padding: 10px;
+            width: 50%;
+            transition: background-color 0.3s;
+        }
+        .submit:hover{
+          background-color: #ff0000;
+        }
+
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="nav">
+      <h1 class="name">Dp_Edits29</h1>
+    </div>
+    <div class="buttons">
+      <a href="addprod.html" class="nav-button">add</a>
+      <a href="home.html" class="nav-button1">home</a>
+      <a href="login.html" class="nav-button">login</a>
+      <a href="signUp.html" class="nav-button1">signUp</a>
+    </div>
+  </div>
+  <div class="container1">
+    <div class="container">
+        <h1 class="head">Update Products</h1>
+        <input type="text" placeholder="Id" id="id" />
+        <input type="text" placeholder="Text" id="text" />
+        <input type="text" placeholder="Description" id="description" />
+        <input type="url" placeholder="Img link" id="img" />
+        <input type="number" placeholder="Price" id="price" />
+      <button class="submit">Submit</button>
+    </div>
+</div>
+</body>
+
+</html>
+<script>
+    let updInd = JSON.parse(localStorage.getItem("updInd"));
+    let addData = JSON.parse(localStorage.getItem("addData"))
+    document.getElementById("id").value=addData[updInd].text;
+    document.getElementById("description").value=addData[updInd].text1;
+    document.getElementById("text").value=addData[updInd].text2;
+    document.getElementById("img").value=addData[updInd].img;
+    document.getElementById("price").value=addData[updInd].price;
+    
+    let btn = document.querySelector(".submit");
+    btn.addEventListener("click",clickfun)
+        function clickfun() {
+    let idInput = document.getElementById("id").value;
+    let descInput = document.getElementById("description").value;
+    let textInput = document.getElementById("text").value;
+    let imgInput = document.getElementById("img").value;
+    let priceInput = document.getElementById("price").value;
+    addData[updInd]=({text: idInput, text1: descInput, text2:textInput, img: imgInput, price: priceInput })
+      localStorage.setItem("addData", JSON.stringify(addData))
+      window.location.href="home.html"
+  }
+  // function display() {
+  //   let contentDiv = document.querySelector(".content");
+  //   contentDiv.innerHTML = "";
+
+  //   for (let i = 0; i < arr.length; i++) {
+  //     let entry = arr[i];
+  //     const entryDiv = document.createElement("div");
+  //     entryDiv.classList.add("entry");
+
+  //     const para = document.createElement("p");
+  //     para.textContent = entry.text;
+
+  //     const img = document.createElement("img");
+  //     img.src = entry.img;
+  //     img.alt = entry.text;
+  //     if (i % 2 == 0) {
+  //       entryDiv.append(para, img);
+  //     } else {
+  //       entryDiv.append(img, para);
+  //     }
+  //     contentDiv.append(entryDiv);
+  //   }
+  // }
+</script>

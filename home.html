@@ -7,13 +7,14 @@
   <title>Document</title>
   <style>
     body {
-      background: linear-gradient(to right, rgba(0, 0, 255, 0.405), rgba(255, 0, 0, 0.395));
+      background-color: #f1f3f6;
       margin: 0;
       font-family: Arial, sans-serif;
+      color: #212121;
     }
 
     h1 {
-      color: aliceblue;
+      color: #ffffff;
       margin: 0;
     }
 
@@ -22,7 +23,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
-      background-color: rgba(0, 0, 0, 0.575);
+      background-color: #ff7b00;
       color: white;
     }
 
@@ -39,42 +40,41 @@
     .nav-button1 {
       color: white;
       text-decoration: none;
-      background-color: #444;
+      background-color: #ff7b00;
       padding: 10px 20px;
-      border-radius: 5px;
+      border-radius: 2px;
       transition: background-color 0.3s;
     }
 
-    .nav-button:hover {
-      background-color: #ff0000;
-    }
-
+    .nav-button:hover,
     .nav-button1:hover {
-      background-color: rgb(0, 47, 255);
+      background-color: #6e3500;
     }
 
     .content {
-      max-width: 90%;
+      max-width: 1200px;
       margin: 20px auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
+      padding: 10px 20px;
     }
 
     .entry {
       display: flex;
       flex-direction: column;
-      align-items: left;
-      border: 1px solid #000000;
-      border-radius: 10px;
+      align-items: center;
+      border: 1px solid #e0e0e0;
+      border-radius: 15px;
       background-color: white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
       overflow: hidden;
-      transition: transform 0.3s;
+      padding: 10px;
     }
 
     .entry:hover {
-      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
     .entry img {
@@ -84,7 +84,40 @@
 
     .entry p {
       padding: 10px;
-      margin: 0%;
+      margin: 0;
+    }
+
+    .button {
+      border: 1px solid #2874f0;
+      border-radius: 4px;
+      margin: 10px;
+      background-color: transparent;
+      color: #2874f0;
+      padding: 10px;
+      width: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #2874f0;
+      color: white;
+    }
+    .button1 {
+      border: 1px solid #2874f0;
+      border-radius: 4px;
+      margin: 10px;
+      background-color: transparent;
+      color: #2874f0;
+      padding: 10px;
+      width: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .button1:hover {
+      background-color: #ff0000;
+      color: white;
     }
   </style>
 </head>
@@ -104,29 +137,69 @@
   <div class="content"></div>
 
   <script>
-    let adddata = JSON.parse(localStorage.getItem("addDATA")) || [];
-    console.log(adddata);
-    let contentDiv = document.querySelector(".content");
-    contentDiv.innerHTML = "";
+    let addData = JSON.parse(localStorage.getItem("addData")) || [];
+    let addcartData = JSON.parse(localStorage.getItem("addcartData")) || [];
+    localStorage.setItem("addData", JSON.stringify(addData));
+    localStorage.setItem("addcartData", JSON.stringify(addcartData));
+    let body=document.querySelector("body");
 
-    for (let i = 0; i < adddata.length; i++) {
-      let entry = adddata[i];
+    let contentDiv = document.querySelector(".content");
+    function display(){
+    contentDiv.innerHTML = "";
+    for (let i = 0; i < addData.length; i++) {
+      let entry = addData[i];
       const entryDiv = document.createElement("div");
       entryDiv.classList.add("entry");
 
       const para = document.createElement("p");
-      para.textContent = entry.text;
+      para.textContent = entry.text2;
+      const description = document.createElement("p");
+      description.textContent = entry.text1;
 
       const pricedata = document.createElement("p");
-      pricedata.textContent = "RS " + entry.price;
+      pricedata.textContent = "₹ " + entry.price;
 
       const img = document.createElement("img");
       img.src = entry.img;
       img.alt = entry.text;
 
-      entryDiv.append(img, para, pricedata);
+      let addcartbtn = document.createElement("button");
+      addcartbtn.innerText = "Add To Cart";
+      addcartbtn.classList.add("button");
+      addcartbtn.addEventListener("click", function() {
+        addcart(i);
+      });
+      function addcart(i){
+        addcartData.push({text:addData[i].text, text1:addData[i].text1, text2: addData[i].text2, img: addData[i].img, price: addData[i].price });
+        localStorage.setItem("addcartData", JSON.stringify(addcartData));
+        console.log(addcartData);
+      }
+
+      let updatebtn = document.createElement("button");
+      updatebtn.innerText = "Update";
+      updatebtn.classList.add("button");
+      updatebtn.addEventListener("click", function() {
+        localStorage.setItem("updInd", JSON.stringify(i));
+        window.location.href = "updatecart.html";
+      });
+
+      let deletebtn = document.createElement("button");
+      deletebtn.innerText = "Delete";
+      deletebtn.classList.add("button1");
+      deletebtn.addEventListener("click", function () {
+          delData(i);
+        });
+      entryDiv.append(img, para,description, pricedata,addcartbtn, updatebtn,deletebtn);
       contentDiv.append(entryDiv);
     }
+    body.append(contentDiv);
+  }
+  display();
+  function delData(i){
+          addData.splice(i,1);
+          localStorage.setItem("addData", JSON.stringify(addData));
+          display();
+        }
   </script>
 </body>
 
